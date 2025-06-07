@@ -9,7 +9,7 @@ def main():
     
     clock = pygame.time.Clock()
 
-    principal_menu = Menu()
+    main_menu = Menu()
       
     running = True
     start_view = True
@@ -21,16 +21,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                     running = False
-            if principal_menu.is_menu_running():
-                 principal_menu.handle_events(event)
+            if main_menu.is_menu_running():
+                 main_menu.handle_events(event)
 
 
-        if principal_menu.is_menu_running():
-            principal_menu.draw(screen)
+        if main_menu.is_menu_running():
+            main_menu.draw(screen)
 
-        elif principal_menu.is_game_started():
-            principal_menu.set_game_status(True)
-            screen.fill(constants.BG2)
+        elif main_menu.is_game_started():
+            main_menu.set_game_status(True)
+            #screen.fill(constants.COLOR_RED)
            
         else:
             running = False

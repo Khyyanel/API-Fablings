@@ -14,8 +14,8 @@ class Menu():
     
     def start_window(self, screen):
         screen.blit(ui.img_transform_bg, (0, 0))
-        pygame.draw.rect(screen, constants.BG, ui.start_button)
-        pygame.draw.rect(screen, constants.BG, ui.exit_button)
+        pygame.draw.rect(screen, constants.COLOR_WHITE, ui.start_button)
+        pygame.draw.rect(screen, constants.COLOR_WHITE, ui.exit_button)
 
         screen.blit(ui.title, (constants.TITLE_MENU_WIDTH, constants.TITLE_MENU_HEIGHT))
         screen.blit(ui.text_start_button, (ui.start_button.x + 18, ui.start_button.y + 10))
@@ -35,8 +35,8 @@ class Menu():
 
     def draw(self, screen): 
         screen.blit(ui.img_transform_bg, (0,0))
-        pygame.draw.rect(screen, constants.BG, ui.start_button)
-        pygame.draw.rect(screen, constants.BG, ui.exit_button)
+        pygame.draw.rect(screen, constants.COLOR_WHITE, ui.start_button)
+        pygame.draw.rect(screen, constants.COLOR_WHITE, ui.exit_button)
         screen.blit(ui.title, (constants.TITLE_MENU_WIDTH, constants.TITLE_MENU_HEIGHT))
         screen.blit(ui.text_start_button, (ui.start_button.x + 18, ui.start_button.y + 10))
         screen.blit(ui.text_exit_button, (ui.exit_button.x + 25, ui.exit_button.y + 10))

@@ -5,9 +5,11 @@ Aquí guardamos todas las constantes para encontrarlas más fácilmente,
 
 SCR_WIDTH = 960
 SCR_HEIGH = 540
-BG = (255, 255, 255) #Blanco
-BG2 = (255, 0, 0) #Rojo
-BG3 = (0, 204, 255) #Celeste
+
+COLOR_WHITE = (255, 255, 255) 
+COLOR_RED = (255, 0, 0) 
+COLOR_BLUE = (0, 204, 255) 
+COLOR_BLACK = (0 ,0 ,0)
 
 MAX_FPS = 60
 
