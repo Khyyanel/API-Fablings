@@ -45,9 +45,11 @@ except pygame.error as e:
 
 #Botones
 character_select_button = pygame.Rect(constants.SCR_WIDTH - 250, 15, constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT)
+tutorial_button = pygame.Rect(60, 45, constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT)
 character_back_button = pygame.Rect(constants.SCR_WIDTH - 250, 70, constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT)
 
 text_ok_button = font_button.render("Aceptar", True, 0)
+text_tutorial_button = font_button.render("Tutorial", True, 0)
 text_back_button = font_button.render("Volver", True, 0)
 
 def texto_prueba(texto, screen):

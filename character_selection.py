@@ -45,6 +45,7 @@ class Character_Selection:
     def draw(self, screen):
         screen.blit(ui.img_transform_sc, (0,0)) #imagen de fondo
         pygame.draw.rect(screen, constants.COLOR_BLUE, ui.character_back_button)
+        pygame.draw.rect(screen, constants.COLOR_WHITE, ui.tutorial_button)
         
         if self.area_selected:
             pygame.draw.rect(screen, constants.COLOR_YELLOW, self.area_selected, 5)
@@ -54,6 +55,7 @@ class Character_Selection:
             pygame.draw.rect(screen, constants.COLOR_GRAY, ui.character_select_button)
 
         screen.blit(ui.text_ok_button, (ui.character_select_button.x + 12, ui.character_select_button.y + 10))
+        screen.blit(ui.text_tutorial_button, (ui.tutorial_button.x + 8, ui.tutorial_button.y + 10))
         screen.blit(ui.text_back_button, (ui.character_back_button.x + 18, ui.character_back_button.y + 10))
 
 
