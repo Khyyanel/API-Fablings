@@ -1,5 +1,5 @@
 import pygame
-from GameManager import GameManager
+from game_manager import GameManager
 
 
 def main():
