@@ -22,12 +22,17 @@ try:
 except pygame.error as e:
     print("No se pudieron cargar las fuentes - {e}")
 
+#Textos
+title_menu = font_title.render("FABLINGS", True, constants.COLOR_RED)
+
 #Botones
-start_button = pygame.Rect(constants.SCR_WIDTH / 2 - 100, constants.SCR_HEIGH / 2 - 10 , 150, 50)
-exit_button = pygame.Rect(constants.SCR_WIDTH / 2 - 100, constants.SCR_HEIGH / 2 + 70 , 150, 50)
+start_button = pygame.Rect(constants.BUTTON_LEFT, constants.START_BUTTON_TOP , constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT)
+exit_button = pygame.Rect(constants.BUTTON_LEFT, constants.EXIT_BUTTON_TOP , constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT)
+character_select_button = pygame.Rect(constants.SCR_WIDTH - 250, 50, 200, 50)
+
 text_start_button = font_button.render("Jugar", True, 0)
 text_exit_button = font_button.render("Salir", True, 0)
-title = font_title.render("FABLINGS", True, constants.COLOR_RED)
+text_ok_button = font_button.render("Aceptar", True, 0)
 
 ### SELECCIÓN PERSONAJE ###
 try:
@@ -35,4 +40,8 @@ try:
     img_transform_sc = pygame.transform.scale(img_character_selec_screen, (constants.SCR_WIDTH, constants.SCR_HEIGH))
 except pygame.error as e:
     errors.img_error("assets/img/seleccion-personaje.png", e)
-    
+
+
+def texto_prueba(texto, screen):
+    texto_prueba = font_button.render(texto, True, 0)
+    screen.blit(texto_prueba, (constants.TITLE_MENU_WIDTH, constants.TITLE_MENU_HEIGHT))
