@@ -11,7 +11,7 @@ pygame.font.init()
 #Imágenes
 try:
     img_initial_bg = pygame.image.load("assets/img/fondo inicio.png")
-    img_transform_bg = pygame.transform.scale(img_initial_bg, (constants.SCR_WIDTH, constants.SCR_HEIGH))
+    img_transform_bg = pygame.transform.scale(img_initial_bg, (constants.SCR_WIDTH, constants.SCR_HEIGHT))
 except pygame.error as e:
     errors.img_error("assets/img/fondo inicio.png", e)
 
@@ -39,7 +39,7 @@ text_options_button = font_button.render("Opciones", True, 0)
 ### SELECCIÓN PERSONAJE ###
 try:
     img_character_selec_screen = pygame.image.load("assets/img/seleccion-personaje.png")
-    img_transform_sc = pygame.transform.scale(img_character_selec_screen, (constants.SCR_WIDTH, constants.SCR_HEIGH))
+    img_transform_sc = pygame.transform.scale(img_character_selec_screen, (constants.SCR_WIDTH, constants.SCR_HEIGHT))
 except pygame.error as e:
     errors.img_error("assets/img/seleccion-personaje.png", e)
 

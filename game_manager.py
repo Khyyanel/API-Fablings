@@ -12,9 +12,10 @@ la lógica principal, la puntuación, los recursos, etc., y solo tiene sentido q
 fuente de verdad para toda esa información.
 """
 
-import pygame, constants, ui
+import pygame, sys, constants, music
 from menu import Menu
 from character_selection import Character_Selection
+from player import Player
 
 class GameManager():
     _instance = None #singleton
@@ -28,7 +29,14 @@ class GameManager():
     def __init__(self):
         if not GameManager._initialized:
             pygame.init()
-            self.screen = pygame.display.set_mode((constants.SCR_WIDTH, constants.SCR_HEIGH))
+            pygame.mixer.init() #Inicializa el módulo mixer para la música
+
+            # --- MÚSICA --- #
+            music.load_music("assets/music/medieval-prueba.mp3")
+            music.set_music_volume(0.8)
+            music.play_music()
+
+            self.screen = pygame.display.set_mode((constants.SCR_WIDTH, constants.SCR_HEIGHT))
             pygame.display.set_caption("Fablings")
 
             self.running = True
@@ -36,7 +44,7 @@ class GameManager():
 
             self.main_menu = Menu(self)
             self.character_selection = Character_Selection(self)
-            self.character = None
+            self.player = None
 
             self.game_state = "MENU" #Para manejar el estado actual del juego
 
@@ -65,9 +73,14 @@ class GameManager():
                 self.character_selection.handle_events(event)
                 
                 if self.character_selection.is_ready():
-                    self.character = self.character_selection.get_character()
+                    character_name = self.character_selection.get_character_selected_name()
+                    character_image = self.character_selection.get_character_selected_image_url()
+                    self.player = Player(character_name, character_image)
                     self.game_state = "GAME"
                     self.character_selection.reset()
+            
+            elif self.game_state == "GAME":
+                pass
 
             
  #Para lógica de cada estado del juego     
@@ -94,11 +107,10 @@ class GameManager():
 
         elif self.game_state == "GAME":
             self.screen.fill(constants.COLOR_GRAY)
-            ui.texto_prueba("Elegiste a: " + str(self.character), self.screen)
-        
+            self.player.draw(self.screen)
+            
         pygame.display.flip()
 
-    
     def run(self):
         while self.running:
             self.clock.tick(constants.MAX_FPS)
@@ -106,7 +118,9 @@ class GameManager():
             self.draw()
             self.update()
               
+        pygame.mixer.music.stop()
         pygame.quit()
+        sys.exit()
 
 
               
