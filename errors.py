@@ -1,10 +1,12 @@
 
 import pygame, constants
 
+#recibe como parámetro la imagen y el tipo de error
 def img_error(image, e):
     print(f"Error al cargar la imagen: {image} - {e}")
-    img_transform_sc = pygame.Surface((constants.SCR_WIDTH, constants.SCR_HEIGHT)) 
-    img_transform_sc.fill(constants.COLOR_BLACK) 
+
+def img_error(image):
+    print(f"Error al cargar la imagen: {image}")
 
 def music_error(music, e):
     print(f"No se pudo cargar el archivo de música: {e}")
