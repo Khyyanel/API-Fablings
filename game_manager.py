@@ -33,7 +33,7 @@ class GameManager():
 
             # --- MÚSICA --- #
             music.load_music("assets/music/medieval-prueba.mp3")
-            music.set_music_volume(0.8)
+            music.set_music_volume(0.5)
             music.play_music()
 
             self.screen = pygame.display.set_mode((constants.SCR_WIDTH, constants.SCR_HEIGHT))
