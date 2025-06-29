@@ -15,7 +15,6 @@ fuente de verdad para toda esa información.
 import pygame, constants, music
 from main_menu import Menu
 from character_selection import Character_Selection
-from player import Player
 from game import Game
 
 class GameManager():
@@ -45,7 +44,6 @@ class GameManager():
 
             self.main_menu = Menu(self) #se crea una instancia llamada main_menu de la Clase Menu
             self.character_selection = Character_Selection(self) 
-            self.player = None #se inicializa una variable 'vacía' para el jugador
             self.game_logic = Game()
 
             self.game_state = "MENU" #Para manejar el estado actual del juego
@@ -87,9 +85,10 @@ class GameManager():
 
         elif self.game_state == "CHARACTER_SELECTION":
                 if self.character_selection.is_ready():
+                    
                     character_name = self.character_selection.get_character_selected_name()
                     character_image_path = self.character_selection.get_character_selected_image_url()
-                    self.player = Player(character_name, character_image_path)
+                    self.game_logic.set_player(character_name, character_image_path)
                     self.game_state = "GAME"
                     self.character_selection.reset()
 
@@ -110,8 +109,8 @@ class GameManager():
             self.character_selection.draw(self.screen)
 
         elif self.game_state == "GAME":
-            self.game_logic.draw(self.screen) #primero dibujamos el fondo
-            self.player.draw(self.screen) #después las imágenes del personaje
+            self.game_logic.draw(self.screen) 
+
             
             pass
             

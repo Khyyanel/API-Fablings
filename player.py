@@ -6,10 +6,10 @@ class Player():
 
         #CARACTERÍSTICAS
         self.stadistics = {
-             "pericia": 10, 
-             "supervivencia": 10,
-             "conocimiento": 10, 
-             "suerte": 10
+             "pericia": 0, 
+             "supervivencia": 0,
+             "conocimiento": 0, 
+             "suerte": 0
         }
         self.items = []
         self.health = 3
@@ -124,26 +124,28 @@ class Player():
         heart_image = self.images["health"]["image_loaded"]
         heart_x = self.images["health"]["x"]
         heart_y = self.images["health"]["y"]
+        x_offset = 40
 
         if self.health == 3:
-           screen.blit(heart_image, (heart_x + 40, heart_y))
-           screen.blit(heart_image, (heart_x + 80, heart_y))
+           screen.blit(heart_image, (heart_x + x_offset, heart_y))
+           screen.blit(heart_image, (heart_x + x_offset*2, heart_y))
         
         elif self.health == 2:
-           screen.blit(heart_image, (heart_x + 40, heart_y))
+           screen.blit(heart_image, (heart_x + x_offset, heart_y))
 
     def show_number_stadistics(self, screen):
+        x_offset = 50
         for name, value in self.stadistics.items():  
             text_stadistics = ui.font_stadistics.render(str(value), True, 0)
 
             if name == "pericia":
                 x = constants.TEXT_STADISTICS_X
             elif name == "suerte":
-                x = constants.TEXT_STADISTICS_X + 50
+                x = constants.TEXT_STADISTICS_X + x_offset 
             elif name == "supervivencia":
-                x = constants.TEXT_STADISTICS_X + 100
+                x = constants.TEXT_STADISTICS_X + x_offset*2
             elif name == "conocimiento":
-                x = constants.TEXT_STADISTICS_X + 150
+                x = constants.TEXT_STADISTICS_X + x_offset*3
                 
                 
             screen.blit(text_stadistics, (x, constants.TEXT_STADISTICS_Y))
