@@ -154,3 +154,7 @@ class Player():
                 
             screen.blit(text_stadistics, (x, constants.TEXT_STADISTICS_Y)) #Dibujamos el número
 
+    def get_current_stadistic(self,stadistic):
+        stadistica = self.stadistics[stadistic]
+        return stadistica
+

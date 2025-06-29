@@ -33,7 +33,7 @@ class GameManager():
 
             # --- MÚSICA --- #
             music.load_music("assets/music/medieval-prueba.mp3")
-            music.set_music_volume(0.5)
+            music.set_music_volume(0)
             music.play_music()
 
             self.screen = pygame.display.set_mode((constants.SCR_WIDTH, constants.SCR_HEIGHT)) #se crea una pantalla de tamaño (ancho, alto)
@@ -68,7 +68,7 @@ class GameManager():
                 self.character_selection.handle_events(event)
             
             elif self.game_state == "GAME":
-                pass
+                self.game_logic.handle_events(event)
 
             
  #Para lógica de cada estado del juego
@@ -93,8 +93,7 @@ class GameManager():
                     self.character_selection.reset()
 
         elif self.game_state == "GAME":
-            #print(f"Estado: {self.game_state}")
-            pass
+           self.game_logic.update()
 
         elif self.game_state == "EXIT":
             self.running = False
