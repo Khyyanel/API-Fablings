@@ -136,8 +136,12 @@ class Player():
     def show_number_stadistics(self, screen):
         x_offset = 50
         for name, value in self.stadistics.items():  
-            text_stadistics = ui.font_stadistics.render(str(value), True, 0)
+            text_stadistics = ui.font_stadistics.render(str(value), True, 0) 
+            #El valor de value es un int - número entero (Por ejemplo, self.stadistics["pericia"] = 1)
+            #Entonces, para escribir el texto, necesitamos que ese valor entero sea una cadena de texto
+            #Por eso convertirmos de int a str (string - texto) con str(value)
 
+            #Posición en X de dónde se muestra el número de la estadística
             if name == "pericia":
                 x = constants.TEXT_STADISTICS_X
             elif name == "suerte":
@@ -148,5 +152,5 @@ class Player():
                 x = constants.TEXT_STADISTICS_X + x_offset*3
                 
                 
-            screen.blit(text_stadistics, (x, constants.TEXT_STADISTICS_Y))
+            screen.blit(text_stadistics, (x, constants.TEXT_STADISTICS_Y)) #Dibujamos el número
 

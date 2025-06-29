@@ -9,9 +9,11 @@ pygame.font.init() #Inicializamos las fuentes
 
 #Fuentes
 try:
-    font_button = pygame.font.Font("assets/fonts/Daydream.ttf", 20)
-    font_button_events = pygame.font.Font("assets/fonts/Daydream.ttf", 10)
     font_title = pygame.font.Font("assets/fonts/FANTASY MAGIST.otf", 100)
+    font_button = pygame.font.Font("assets/fonts/Daydream.ttf", 20)
+    
+    font_button_events_title = pygame.font.Font("assets/fonts/Daydream.ttf", 13)
+    font_button_events_description = pygame.font.Font("assets/fonts/FANTASY MAGIST.otf", 13) 
     font_stadistics = pygame.font.Font("assets/fonts/FANTASY MAGIST.otf", 25) 
 except pygame.error as e:
     print("No se pudieron cargar las fuentes - {e}")
