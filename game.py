@@ -8,9 +8,11 @@ class Game():
         self.player = None
         self.event = Event()
 
-
     def set_player(self, character_name, character_image_path):
         self.player = Player(character_name, character_image_path)
+
+    def update(self):
+        self.event.time_to_choose()
 
     def draw(self, screen):
        screen.fill(constants.COLOR_WHITE)
@@ -18,8 +20,7 @@ class Game():
        self.event.draw(screen)
        
 
-    def update():
-        pass
+    
 
 
    

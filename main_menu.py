@@ -61,18 +61,8 @@ class Menu():
         self.options_button.draw(screen)
         self.exit_button.draw(screen)
 
-        
-        #dibujamos rectangulos en la pantalla para cada botón del menú principal
-        #rect(pantalla, color, rectángulo)
-        #pygame.draw.rect(screen, constants.COLOR_WHITE, ui.start_button) 
-        #pygame.draw.rect(screen, constants.COLOR_WHITE, ui.options_button)
-        #pygame.draw.rect(screen, constants.COLOR_WHITE, ui.exit_button)
-
-        #mostramos el título y botones
+        #mostramos el título 
         screen.blit(ui.title_menu, (constants.TITLE_MENU_X, constants.TITLE_MENU_Y))
-        #screen.blit(ui.text_start_button, (ui.start_button.x + 32, ui.start_button.y + 10))
-        #screen.blit(ui.text_options_button, (ui.options_button.x + 2, ui.options_button.y +10 ))
-        #screen.blit(ui.text_exit_button, (ui.exit_button.x + 35, ui.exit_button.y + 10))
 
     #Funciones GET
     #Sirven para adquirir los valores internos de la clase

@@ -3,14 +3,6 @@ from button_events import Button_Options
 
 class Event():
     def __init__(self): 
-         # Cargar las imágenes una sola vez al inicializar la clase
-        self.image_paths = {
-            "pericia": "assets/img/pericia.png",
-            "suerte": "assets/img/suerte.png",
-            "supervivencia": "assets/img/supervivencia.png",
-            "conocimiento": "assets/img/conocimiento.png"
-        }
-
         self.events = {
             "event0": {
                 "image_path": "assets/img/events/event0.png",
@@ -43,35 +35,25 @@ class Event():
             }
         }
 
-        self.current_event = self.events["event1"]
+        self.current_event = None
         self.current_event_image = None
+
+        self.available_events = list(self.events.keys()) # ["event0", "event1", "event2"]
+        self.playable_events = []
+        self.past_events = []
+        self.choose_other_event = True
 
         self.button1 = None
         self.button2 = None
         self.button3 = None
 
-        self.create_buttons(self.current_event)
-
-
-    def upload_to_option_images(self):
-        image_paths = {
-            "pericia": "assets/img/pericia.png",
-            "suerte": "assets/img/suerte.png",
-            "supervivencia": "assets/img/supervivencia.png",
-            "conocimiento": "assets/img/conocimiento.png"
-        }
-
-        for name, path in image_paths.items():
-            try:
-                image = pygame.image.load(path).convert_alpha()
-                self.option_images[name] = pygame.transform.scale(image, (constants.EVENT_OPTION_IMAGE_WIDTH, constants.EVENT_OPTION_IMAGE_HEIGHT))
-            
-            except pygame.error as e:
-                errors.img_error(path, e)
-                self.option_images[name] = None
+        self.events_playable()
+        self.choose_event_random()
+  
     
-    def create_buttons(self, current_event):
+    def create_buttons(self):
         y_offset = 60
+        current_event = self.current_event
 
         self.button1 = Button_Options(
             x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
@@ -105,15 +87,111 @@ class Event():
 
 
     def draw(self, screen):
-        self.current_event_image = pygame.image.load(self.events["event0"]["image_path"]).convert_alpha()
+        image_path = self.current_event["image_path"]
+        self.current_event_image = pygame.image.load(image_path).convert_alpha()
         self.current_event_image = pygame.transform.scale(self.current_event_image, (constants.EVENT_IMAGE_WIDTH, constants.EVENT_IMAGE_HEIGHT))
 
         screen.blit(self.current_event_image, (constants.EVENT_IMAGE_X, constants.EVENT_IMAGE_Y))
         
         self.draw_buttons(screen)
+        self.draw_title_and_description(screen)
 
 
     def draw_buttons(self, screen):
         self.button1.draw(screen)
         self.button2.draw(screen)
         self.button3.draw(screen)
+
+    def draw_title_and_description(self,screen):
+        current_event = self.current_event
+
+        title = ui.font_title_event.render(current_event["title"], True, constants.COLOR_BLACK)
+        description = ui.font_description_event.render(current_event["description"], True, constants.COLOR_BLACK)
+
+        screen.blit(title, (constants.TITLE_EVENT_TEXT_X, constants.TITLE_EVENT_TEXT_Y))
+
+        description_rect = pygame.Rect(
+            constants.DESCRIPTION_EVENT_TEXT_X, 
+            constants.DESCRIPTION_EVENT_TEXT_Y, 
+            constants.DESCRIPTION_EVENT_TEXT_WIDTH, # Ancho máximo para la descripción
+            constants.DESCRIPTION_EVENT_TEXT_HEIGHT # Alto máximo para la descripción
+        )
+
+        self.draw_wrapped_text(
+            screen,
+            current_event["description"],
+            description_rect     
+        )
+
+    def events_playable(self):
+        # Filtrar los eventos que ya se han mostrado
+        for name_event in self.available_events: 
+            if name_event not in self.past_events:
+                self.playable_events.append(name_event)
+
+            if not self.playable_events:
+                print("¡Todos los eventos se han jugado! Reiniciando eventos pasados.")
+                self.past_events = [] #reiniciamos los eventos
+                self.playable_events = self.available_events # Reiniciar para que todos estén disponibles de nuevo
+
+
+    def choose_event_random(self):
+        if self.choose_other_event:
+            # Elegir una clave de evento aleatoria de los que quedan
+            selected_event = random.choice(self.playable_events)
+
+            # Actualizar el evento actual y añadirlo a los eventos pasados
+            self.current_event = self.events[selected_event]
+            self.past_events.append(selected_event)
+
+            # Opcional: imprimir para verificar
+            print(f"Evento seleccionado: {selected_event}")
+            print(f"Eventos pasados: {self.past_events}")
+
+            self.choose_other_event = False
+            self.create_buttons()
+            
+
+
+    def time_to_choose(self):
+        if self.choose_other_event== True:
+            self.choose_event_random()
+        else:
+            print("aquí")
+
+    def draw_wrapped_text(self, surface, text, rect, font=ui.font_description_event , color=constants.COLOR_BLACK):
+        # Crear una superficie temporal para dibujar el texto y luego copiarla
+        # Sirve para que el texto se dibuje dentro de los límites del rect
+
+        words = text.split(' ')
+        lines = []
+        current_line = []
+        
+        for word in words:
+            # Prueba si la palabra actual + lo que ya tengo en la linea actual excede el ancho del rectángulo
+            test_line = ' '.join(current_line + [word])
+            text_width, text_height = font.size(test_line)
+            
+            if text_width <= rect.width:
+                current_line.append(word)
+            else:
+                # Si excede, guardamos la linea actual y empezamos una nueva
+                lines.append(' '.join(current_line))
+                current_line = [word] # La palabra que excedió empieza la nueva línea
+
+        lines.append(' '.join(current_line)) # Agrega la última línea
+
+        #Dibujamos cada línea
+        y_offset = 0
+        line_spacing = 5 # Espacio entre líneas
+
+        for line in lines:
+            line_surface = font.render(line, True, color) # Si la línea actual excede la altura del área, truncamos el texto
+            
+            if rect.top + y_offset + line_surface.get_height() <= rect.bottom:
+                surface.blit(line_surface, (rect.left, rect.top + y_offset)) #<- Aquí las dibujamos en la pantalla
+                y_offset += line_surface.get_height() + line_spacing
+            else:
+                break # Detener si no hay espacio para más líneas
+
+
