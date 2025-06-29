@@ -12,10 +12,10 @@ la lógica principal, la puntuación, los recursos, etc., y solo tiene sentido q
 fuente de verdad para toda esa información.
 """
 
-import pygame, sys, constants, music
-from menu import Menu
+import pygame, constants, music
+from main_menu import Menu
 from character_selection import Character_Selection
-from player import Player
+from game import Game
 
 class GameManager():
     _instance = None #singleton
@@ -28,7 +28,7 @@ class GameManager():
 
     def __init__(self):
         if not GameManager._initialized:
-            pygame.init()
+            pygame.init() 
             pygame.mixer.init() #Inicializa el módulo mixer para la música
 
             # --- MÚSICA --- #
@@ -36,23 +36,26 @@ class GameManager():
             music.set_music_volume(0.5)
             music.play_music()
 
-            self.screen = pygame.display.set_mode((constants.SCR_WIDTH, constants.SCR_HEIGHT))
-            pygame.display.set_caption("Fablings")
+            self.screen = pygame.display.set_mode((constants.SCR_WIDTH, constants.SCR_HEIGHT)) #se crea una pantalla de tamaño (ancho, alto)
+            pygame.display.set_caption("Fablings") #título del juego
 
             self.running = True
             self.clock = pygame.time.Clock()
 
-            self.main_menu = Menu(self)
-            self.character_selection = Character_Selection(self)
-            self.player = None
+            self.main_menu = Menu(self) #se crea una instancia llamada main_menu de la Clase Menu
+            self.character_selection = Character_Selection(self) 
+            self.game_logic = Game()
 
             self.game_state = "MENU" #Para manejar el estado actual del juego
 
     
-    def set_game_state(self, status):
+    #Función para establecer el estado del juego, le mandamos el parámetro del estado en el que debe estar
+    def set_game_state(self, status): 
         self.game_state = status
 
-#Para eventos
+
+    #Función para manejar todos los eventos de pygame (clics, uso del teclado, etc.)
+    #Sólo se verificarán los eventos que estén sucediendo en cada etapa o estatus del juego. 
     def handle_events(self): 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -61,33 +64,33 @@ class GameManager():
             if self.game_state == "MENU":
                 self.main_menu.handle_events(event)
 
-                if self.main_menu.is_game_started():
-                    self.game_state = "CHARACTER_SELECTION"
-                    self.main_menu.reset()
-
-                if self.main_menu.is_game_quit():
-                    self.game_state = "EXIT"
-                    self.main_menu.reset()
-
             elif self.game_state == "CHARACTER_SELECTION":
                 self.character_selection.handle_events(event)
-                
-                if self.character_selection.is_ready():
-                    character_name = self.character_selection.get_character_selected_name()
-                    character_image = self.character_selection.get_character_selected_image_url()
-                    self.player = Player(character_name, character_image)
-                    self.game_state = "GAME"
-                    self.character_selection.reset()
             
             elif self.game_state == "GAME":
                 pass
 
             
- #Para lógica de cada estado del juego     
+ #Para lógica de cada estado del juego
+ # Pasamos de un status a otro o bien, se llaman funciones para actualizar al juego   
     def update(self):
         if self.game_state == "MENU":
-            #print(f"Estado: {self.game_state}")
-            pass
+            if self.main_menu.is_game_started(): #si se da clic al botón jugar
+                    self.game_state = "CHARACTER_SELECTION"
+                    self.main_menu.reset()
+
+            if self.main_menu.is_game_quit(): #si se da clic al botón salir
+                self.game_state = "EXIT"
+                self.main_menu.reset()
+
+        elif self.game_state == "CHARACTER_SELECTION":
+                if self.character_selection.is_ready():
+                    
+                    character_name = self.character_selection.get_character_selected_name()
+                    character_image_path = self.character_selection.get_character_selected_image_url()
+                    self.game_logic.set_player(character_name, character_image_path)
+                    self.game_state = "GAME"
+                    self.character_selection.reset()
 
         elif self.game_state == "GAME":
             #print(f"Estado: {self.game_state}")
@@ -97,7 +100,7 @@ class GameManager():
             self.running = False
 
 
-#Para dibujar en la pantalla
+#Para dibujar imágenes y fondos en la pantalla
     def draw(self):
         if self.game_state == "MENU":
             self.main_menu.draw(self.screen)
@@ -106,10 +109,12 @@ class GameManager():
             self.character_selection.draw(self.screen)
 
         elif self.game_state == "GAME":
-            self.screen.fill(constants.COLOR_GRAY)
-            self.player.draw(self.screen)
+            self.game_logic.draw(self.screen) 
+
             
-        pygame.display.flip()
+            pass
+            
+        pygame.display.flip() #Le muestra al usuario las imagenes que cargamos
 
     def run(self):
         while self.running:
@@ -120,7 +125,6 @@ class GameManager():
               
         pygame.mixer.music.stop()
         pygame.quit()
-        sys.exit()
 
 
               
