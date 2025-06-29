@@ -33,14 +33,6 @@ except pygame.error as e:
 #Textos
 title_menu = font_title.render("FABLINGS", True, constants.COLOR_RED)
 
-#Botones
-#exit_button = pygame.Rect(constants.BUTTON_LEFT, constants.EXIT_BUTTON_TOP , constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT)
-#options_button = pygame.Rect(constants.BUTTON_LEFT, constants.OPTIONS_BUTTON_TOP , constants.BUTTON_WIDTH, constants.BUTTON_HEIGHT)
-
-#text_start_button = font_button.render("Jugar", True, 0) #render("texto a mostrar", "Mostrar", Color. Si es 0 = negro)
-#text_exit_button = font_button.render("Salir", True, 0)
-#text_options_button = font_button.render("Opciones", True, 0)
-
 
 #----------SELECCIÓN PERSONAJE----------#
 try:
@@ -49,9 +41,6 @@ try:
 except pygame.error as e:
     errors.img_error("assets/img/seleccion-personaje.png", e)
 
-#text_ok_button = font_button.render("Aceptar", True, 0)
-#text_tutorial_button = font_button.render("Tutorial", True, 0)
-#text_back_button = font_button.render("Volver", True, 0)
 
 
 

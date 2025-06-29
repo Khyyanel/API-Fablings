@@ -21,7 +21,6 @@ class Button_Options(Button):
     
         # Renderizar el título y la descripción
         self.title_surface = self.font_title.render(self.title_text, True, constants.COLOR_BLACK)
-        # Usa un color diferente para la descripción para distinguirla
         self.description_surface = self.font_description.render(self.description_text, True, constants.COLOR_DARK_GRAY)
 
         # Atributos para las posiciones de título y descripción
@@ -40,7 +39,7 @@ class Button_Options(Button):
         except pygame.error as e:
             errors.img_error(self.icon_path, e)
 
-        self._calculate_text_and_icon_positions()
+        self.calculate_text_and_icon_positions()
 
         if self.icon_image and self.icon_rect:
             screen.blit(self.icon_image, self.icon_rect) #Dibuja el icono si hay
@@ -50,8 +49,7 @@ class Button_Options(Button):
         screen.blit(self.description_surface, self.description_rect)
 
 
-    def _calculate_text_and_icon_positions(self):
-        # Esta función ahora solo se encarga de calcular las posiciones. No dibuja nada
+    def calculate_text_and_icon_positions(self): # Esta función ahora solo se encarga de calcular las posiciones. No dibuja nada
         content_start_x = self.rect.left + 10 # Margen desde el borde izquierdo del botón
 
         if self.icon_image and self.icon_rect:  # Si hay un icono, posicionarlo
@@ -61,7 +59,6 @@ class Button_Options(Button):
             text_start_x = content_start_x  # Si no hay icono, el texto comienza en el margen inicial
 
         # Calcular el centro vertical del área de texto combinada (título + descripción)
-        # Asumiendo que el texto se apilará verticalmente
         total_text_height = self.title_rect.height + self.description_rect.height + 5 # 5px de espacio entre ellos
         text_center_y = self.rect.centery
 
@@ -71,7 +68,7 @@ class Button_Options(Button):
         
         # La descripción va debajo del título
         self.description_rect.midleft = (text_start_x, self.title_rect.bottom + 5 + self.description_rect.height / 2 - self.description_rect.height / 2) 
-        # Ajuste para centrar correctamente si el midleft no lo pone en el punto correcto.
-        # Una forma más sencilla para la descripción:
+        # Centrar verticalmente
         self.description_rect.topleft = (text_start_x, self.title_rect.bottom + 5)
+
 

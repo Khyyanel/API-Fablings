@@ -18,6 +18,15 @@ class Game():
        screen.fill(constants.COLOR_WHITE)
        self.player.draw(screen)
        self.event.draw(screen)
+
+    def handle_events(self, event):
+       self.event.handle_events(event)
+
+    def compare_stadistic_event_and_player(self): #PENDIENTE
+        stadistic_event = self.event.get_current_stadistic()
+        stadistic_player = self.player.get_current_stadistic(stadistic_event)
+
+        print(stadistic_player)
        
 
     

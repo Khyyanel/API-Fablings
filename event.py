@@ -38,7 +38,7 @@ class Event():
         self.current_event = None
         self.current_event_image = None
 
-        self.available_events = list(self.events.keys()) # ["event0", "event1", "event2"]
+        self.available_events = list(self.events.keys()) # ["event0", "event1", "event2", etc.]
         self.playable_events = []
         self.past_events = []
         self.choose_other_event = True
@@ -47,8 +47,10 @@ class Event():
         self.button2 = None
         self.button3 = None
 
-        self.events_playable()
-        self.choose_event_random()
+        self.current_stadistic = None
+
+        self.events_playable() #Crear la lista de eventos jugables
+        self.choose_event_random() #Elegir el primer evento
   
     
     def create_buttons(self):
@@ -157,7 +159,7 @@ class Event():
         if self.choose_other_event== True:
             self.choose_event_random()
         else:
-            print("aquí")
+            pass
 
     def draw_wrapped_text(self, surface, text, rect, font=ui.font_description_event , color=constants.COLOR_BLACK):
         # Crear una superficie temporal para dibujar el texto y luego copiarla
@@ -195,3 +197,19 @@ class Event():
                 break # Detener si no hay espacio para más líneas
 
 
+    def handle_events(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = event.pos
+
+            if self.button1.collidepoint(mouse_pos):
+                print("Elegiste opcion1")
+                self.current_stadistic = self.current_event["option1_type"]
+            elif self.button2.collidepoint(mouse_pos):
+                print("Elegiste opcion2")
+                self.current_stadistic = self.current_event["option2_type"]
+            elif self.button3.collidepoint(mouse_pos):
+                print("Elegiste opcion3")
+                self.current_stadistic = self.current_event["option3_type"]
+
+    def get_current_stadistic(self):
+        return self.current_stadistic

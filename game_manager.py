@@ -68,7 +68,7 @@ class GameManager():
                 self.character_selection.handle_events(event)
             
             elif self.game_state == "GAME":
-                pass
+                self.game_logic.handle_events(event)
 
             
  #Para lógica de cada estado del juego
@@ -93,8 +93,7 @@ class GameManager():
                     self.character_selection.reset()
 
         elif self.game_state == "GAME":
-            #print(f"Estado: {self.game_state}")
-            pass
+           self.game_logic.update()
 
         elif self.game_state == "EXIT":
             self.running = False
