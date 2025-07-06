@@ -6,8 +6,8 @@ class Menu():
         self.game_manager = game_manager_instance
         self._game_started = False
         self._game_quit = False
-        self.running = True
-
+        self.running = True      
+            
         self.start_button = Button (
             x = constants.BUTTON_LEFT,
             y = constants.START_BUTTON_TOP,
@@ -19,7 +19,7 @@ class Menu():
             text_offset_x = 35
         )
 
-        self.options_button = Button (
+        self.menu_opciones_button = Button (
             x = constants.BUTTON_LEFT,
             y = constants.OPTIONS_BUTTON_TOP,
             width = constants.BUTTON_WIDTH, 
@@ -53,12 +53,15 @@ class Menu():
 
             if self.exit_button.collidepoint(event.pos): #Si el clic 'colisiona' con el botón de salir
                 self._game_quit = True #asignamos verdadero a la salida del juego
+            if self.menu_opciones_button.collidepoint(event.pos):
+                self.menu_opciones.handle_events(event)
+                self._show_menu_options = True 
 
     def draw(self, screen): #Tenemos como parámetro la pantalla del juego, la mandamos a llamar 
         screen.blit(ui.img_bg_scaled, (0,0)) #blit() sirve para dibujar. Aquí dibujamos el fondo a las medidas de la pantalla en la posición (x=0, y=0)
 
         self.start_button.draw(screen)
-        self.options_button.draw(screen)
+        self.menu_opciones_button.draw(screen)
         self.exit_button.draw(screen)
 
         #mostramos el título 
@@ -73,3 +76,6 @@ class Menu():
     def is_game_quit(self):
         return self._game_quit
     
+    #Funciones ver menu opciones
+    def show_menu_options(self):
+        return self._show_menu_options
