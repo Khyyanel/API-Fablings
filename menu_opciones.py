@@ -1,12 +1,14 @@
-import pygame, music
+import pygame, music, constants
+from button import Button
 
 class OptionsMenu:
     def __init__(self, game_manager):
         self.game_manager = game_manager
         self.volume = 0.5
         self.progress = 10 #simulacion de progreso
-        self.back_button =pygame.Rect(50, 500, 150, 40)
         self.font = pygame.font.SysFont(None, 36)
+        self.back_button = Button(x = 50, y = 460, width = 150, height = 40, text = "Volver", font = self.font, color = constants.COLOR_WHITE, text_offset_x = 35)
+        
         
         pygame.mixer.init() #Inicializa el módulo mixer para la música
 
@@ -38,8 +40,9 @@ class OptionsMenu:
         text_credits = font.render (f"Créditos: Hecho por Uriel, Kiara, Hernán y Agostina", True, (0, 0, 0))
         screen.blit(text_credits, (100, 280))
         
-        pygame.draw.rect(screen, (100, 100, 100), self.back_button)
-        screen.blit(font.render("Volver", True, (255, 255, 255)), (self.back_button.x + 20, self.back_button.y + 5))
+        self.back_button.draw(screen)
+        #pygame.draw.rect(screen, (100, 100, 100), self.back_button)
+        #screen.blit(font.render("Volver", True, (255, 255, 255)), (self.back_button.x + 20, self.back_button.y + 5))
         
 class TutorialScreen:
     def __init__(self, game_manager):
