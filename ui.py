@@ -11,7 +11,7 @@ pygame.font.init() #Inicializamos las fuentes
 try:
     #Menú principal
     font_title = pygame.font.Font("assets/fonts/FANTASY MAGIST.otf", 100)
-    font_button = pygame.font.Font("assets/fonts/Daydream.ttf", 20)
+    font_button = pygame.font.Font("assets/fonts/Linex Sweet Std Bold.otf", 20)
     
     #Juego
     font_title_event = pygame.font.Font("assets/fonts/FANTASY MAGIST.otf", 30) 
