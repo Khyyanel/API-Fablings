@@ -2,7 +2,6 @@ import pygame, errors
 
 def load_music(music_path):
         try:
-            music_path = "assets/music/medieval-prueba.mp3"
             pygame.mixer.music.load(music_path)
         except pygame.error as e:
             errors.music_error(music_path, e)
@@ -16,7 +15,7 @@ def play_music(loops=-1):
         pygame.mixer.music.stop()
     pygame.mixer.music.play(loops)
 
-def set_music_volume(volume):
+def set_volume(volume):
     #Establece el volumen de la música (entre 0.0 y 1.0).
     pygame.mixer.music.set_volume(volume)
 

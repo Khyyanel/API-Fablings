@@ -16,6 +16,7 @@ import pygame, constants, music
 from main_menu import Menu
 from character_selection import Character_Selection
 from game import Game
+from menu_opciones import OptionsMenu
 
 class GameManager():
     _instance = None #singleton
@@ -29,12 +30,7 @@ class GameManager():
     def __init__(self):
         if not GameManager._initialized:
             pygame.init() 
-            pygame.mixer.init() #Inicializa el módulo mixer para la música
-
-            # --- MÚSICA --- #
-            music.load_music("assets/music/medieval-prueba.mp3")
-            music.set_music_volume(0)
-            music.play_music()
+            
 
             self.screen = pygame.display.set_mode((constants.SCR_WIDTH, constants.SCR_HEIGHT)) #se crea una pantalla de tamaño (ancho, alto)
             pygame.display.set_caption("Fablings") #título del juego
@@ -47,6 +43,8 @@ class GameManager():
             self.game_logic = Game()
 
             self.game_state = "MENU" #Para manejar el estado actual del juego
+            
+            self.options_menu = OptionsMenu(self)
 
     
     #Función para establecer el estado del juego, le mandamos el parámetro del estado en el que debe estar
@@ -69,6 +67,9 @@ class GameManager():
             
             elif self.game_state == "GAME":
                 self.game_logic.handle_events(event)
+                
+            elif self.game_state == "OPTIONS_MENU":
+                self.options_menu.handle_events(event)
 
             
  #Para lógica de cada estado del juego
@@ -97,6 +98,10 @@ class GameManager():
 
         elif self.game_state == "EXIT":
             self.running = False
+            
+        elif self.game_state == "OPTIONS_MENU":
+            
+            pass
 
 
 #Para dibujar imágenes y fondos en la pantalla
@@ -109,6 +114,9 @@ class GameManager():
 
         elif self.game_state == "GAME":
             self.game_logic.draw(self.screen) 
+            
+        elif self.game_state == "OPTIONS_MENU":
+            self.options_menu.draw(self.screen)
 
             
             pass
