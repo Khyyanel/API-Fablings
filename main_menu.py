@@ -6,7 +6,8 @@ class Menu():
         self.game_manager = game_manager_instance
         self._game_started = False
         self._game_quit = False
-        self.running = True      
+        self.running = True   
+        self._show_menu_options = False   
             
         self.start_button = Button (
             x = constants.BUTTON_LEFT,
@@ -54,7 +55,7 @@ class Menu():
             if self.exit_button.collidepoint(event.pos): #Si el clic 'colisiona' con el botón de salir
                 self._game_quit = True #asignamos verdadero a la salida del juego
             if self.menu_opciones_button.collidepoint(event.pos):
-                self.menu_opciones.handle_events(event)
+                self.game_manager.set_game_state("OPTIONS_MENU")
                 self._show_menu_options = True 
 
     def draw(self, screen): #Tenemos como parámetro la pantalla del juego, la mandamos a llamar 
