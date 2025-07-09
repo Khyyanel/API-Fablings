@@ -25,7 +25,7 @@ except pygame.error as e:
 #----------MENU PRINCIPAL----------#
 #Imágenes
 try:
-    img_initial_bg = pygame.image.load("assets/img/fondo inicio.png")
+    img_initial_bg = pygame.image.load("assets/img/Fondo.png")
     img_bg_scaled = pygame.transform.scale(img_initial_bg, (constants.SCR_WIDTH, constants.SCR_HEIGHT))
 except pygame.error as e:
     errors.img_error("assets/img/fondo inicio.png", e)

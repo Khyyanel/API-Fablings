@@ -5,7 +5,7 @@ class Event():
     def __init__(self): 
         self.events = {
             "event0": {
-                "image_path": "assets/img/events/MoradadelaBruja.png",
+                "image_path": "assets/img/events/1.png",
                 "title": "Ruinas1", "description": "El camino se abrió ante un asentamiento hace mucho tiempo olvidado. El silencio parecía gobernar el aire, y las piedras me recibieron con la indiferencia del paso del tiempo.",
                 "option1_title": "Rebuscar", "option1_description": "Éxito: Obtiene 2 Amuletos", "option1_type":"conocimiento",
                 "option2_title": "Descansar", "option2_description": "Éxito: Obtiene 2 Amuletos", "option2_type": "suerte",
@@ -16,7 +16,7 @@ class Event():
             },
 
             "event1": {
-                "image_path": "assets/img/events/MoradadelaBruja.png",
+                "image_path": "assets/img/events/1.png",
                 "title": "Ruinas2", "description": "El camino se abrió ante un asentamiento hace mucho tiempo olvidado. El silencio parecía gobernar el aire, y las piedras me recibieron con la indiferencia del paso del tiempo.",
                 "option1_title": "Rebuscar", "option1_description": "Éxito: Obtiene 2 Amuletos", "option1_type": "suerte",
                 "option2_title": "Descansar", "option2_description": "Éxito: Obtiene 2 Amuletos", "option2_type": "supervivencia",
@@ -27,7 +27,7 @@ class Event():
             },
 
             "event2": {
-                "image_path": "assets/img/events/MoradadelaBruja.png",
+                "image_path": "assets/img/events/1.png",
                 "title": "Ruinas3", "description": "El camino se abrió ante un asentamiento hace mucho tiempo olvidado. El silencio parecía gobernar el aire, y las piedras me recibieron con la indiferencia del paso del tiempo.",
                 "option1_title": "Rebuscar", "option1_description": "Éxito: Obtiene 2 Amuletos", "option1_type": "suerte",
                 "option2_title": "Descansar", "option2_description": "Éxito: Obtiene 2 Amuletos", "option2_type": "suerte",
