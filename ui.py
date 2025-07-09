@@ -11,7 +11,7 @@ pygame.font.init() #Inicializamos las fuentes
 try:
     #Menú principal
     font_title = pygame.font.Font("assets/fonts/FANTASY MAGIST.otf", 100)
-    font_button = pygame.font.Font("assets/fonts/Daydream.ttf", 20)
+    font_button = pygame.font.Font("assets/fonts/Linex Sweet Std Bold.otf", 20)
     
     #Juego
     font_title_event = pygame.font.Font("assets/fonts/FANTASY MAGIST.otf", 30) 
@@ -41,6 +41,12 @@ try:
 except pygame.error as e:
     errors.img_error("assets/img/seleccion-personaje.png", e)
 
+#----------EVENTOS----------------------#
+try:
+    img_event_bg = pygame.image.load("assets/img/Fondo.png")
+    img_bg_scaled = pygame.transform.scale(img_event_bg, (constants.SCR_WIDTH, constants.SCR_HEIGHT))
+except pygame.error as e:
+    errors.img_error("assets/img/Fondo.png", e)
 
 
 

@@ -1,40 +1,42 @@
 import pygame, random, constants, ui, errors
 from button_events import Button_Options
 
+
+
 class Event():
     def __init__(self): 
         self.events = {
             "event0": {
                 "image_path": "assets/img/events/1.png",
-                "title": "Ruinas1", "description": "El camino se abrió ante un asentamiento hace mucho tiempo olvidado. El silencio parecía gobernar el aire, y las piedras me recibieron con la indiferencia del paso del tiempo.",
-                "option1_title": "Rebuscar", "option1_description": "Éxito: Obtiene 2 Amuletos", "option1_type":"conocimiento",
-                "option2_title": "Descansar", "option2_description": "Éxito: Obtiene 2 Amuletos", "option2_type": "suerte",
+                "title": "Camino de Trampas", "description": "Lo que parecía en principio una trampa colocada al azar en el camino no tardó en revelar un campo de dientes metálicos a la espera de una pata incauta.",
+                "option1_title": "Avanzar con cautela", "option1_description": "Evita recibir daño", "option1_type":"pericia",
+                "option2_title": "Buscar una ruta segura", "option2_description": "Evita recibir daño", "option2_type": "supervivencia",
                 "option3_title": "titulo", "option3_description": "Éxito: Obtiene 2 Amuletos", "option3_type": "pericia",
                 "exito": None,
                 "fracaso": None, 
-                "num_opciones": 3
+                "num_opciones": 2
             },
 
             "event1": {
-                "image_path": "assets/img/events/1.png",
-                "title": "Ruinas2", "description": "El camino se abrió ante un asentamiento hace mucho tiempo olvidado. El silencio parecía gobernar el aire, y las piedras me recibieron con la indiferencia del paso del tiempo.",
-                "option1_title": "Rebuscar", "option1_description": "Éxito: Obtiene 2 Amuletos", "option1_type": "suerte",
-                "option2_title": "Descansar", "option2_description": "Éxito: Obtiene 2 Amuletos", "option2_type": "supervivencia",
+                "image_path": "assets/img/events/2.png",
+                "title": "Posada", "description": "Un ambiente jovial permea las estancias de este recinto. Por ofrecerme a cumplir alguna labor se me permitirá descansar.",
+                "option1_title": "Trabajar como cocinero", "option1_description": "Cocina para ganar un lugar en la posada por la noche", "option1_type": "supervivencia",
+                "option2_title": "Trabajar como albañil", "option2_description": "Da mantenimiento al edificio y luego descansa", "option2_type": "pericia",
                 "option3_title": 1, "option3_description": "...", "option3_type": "conocimiento", 
                 "exito": None,
                 "fracaso": None, 
-                "num_opciones": 3
+                "num_opciones": 2
             },
 
             "event2": {
-                "image_path": "assets/img/events/1.png",
-                "title": "Ruinas3", "description": "El camino se abrió ante un asentamiento hace mucho tiempo olvidado. El silencio parecía gobernar el aire, y las piedras me recibieron con la indiferencia del paso del tiempo.",
-                "option1_title": "Rebuscar", "option1_description": "Éxito: Obtiene 2 Amuletos", "option1_type": "suerte",
-                "option2_title": "Descansar", "option2_description": "Éxito: Obtiene 2 Amuletos", "option2_type": "suerte",
+                "image_path": "assets/img/events/3.png",
+                "title": "Biblioteca", "description": "El polvo y las palabras antaño escritas en los libros de este lugar esperan con paciencia a recompensar la curiosidad de sus visitantes con historias olvidadas y saberes ocultos.",
+                "option1_title": "Estudiar", "option1_description": "Absorbe conocimiento antiguo", "option1_type": "conocimiento",
+                "option2_title": "Tomar un libro al azar", "option2_description": "Deja que tus instintos te guíen hacia el conocimiento", "option2_type": "suerte",
                 "option3_title": 1, "option3_description": "Éxito: Obtiene 2 Amuletos", "option3_type": "conocimiento", 
                 "exito": None,
                 "fracaso": None, 
-                "num_opciones": 3
+                "num_opciones": 2
             }
         }
 
@@ -60,71 +62,40 @@ class Event():
         y_offset = 60
         current_event = self.current_event
 
-        if self.current_event["num_opciones"] == 1:
-            self.button1 = Button_Options(
-                x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
-                y=constants.EVENT_OPTION_IMAGE_FIRST_Y, 
-                width=constants.BUTTON_OPTION_WIDTH, 
-                height=constants.BUTTON_OPTION_HEIGHT,
-                title= current_event["option1_title"],
-                description= current_event["option1_description"],
-                icon_path= f"assets/img/{current_event["option1_type"]}.png"
-            )
-        elif self.current_event["num_opciones"] == 2:
-                
-                self.button1 = Button_Options(
-                x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
-                y=constants.EVENT_OPTION_IMAGE_FIRST_Y, 
-                width=constants.BUTTON_OPTION_WIDTH, 
-                height=constants.BUTTON_OPTION_HEIGHT,
-                title= current_event["option1_title"],
-                description= current_event["option1_description"],
-                icon_path= f"assets/img/{current_event["option1_type"]}.png"
+
+        self.button1 = Button_Options(
+            x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
+            y=constants.EVENT_OPTION_IMAGE_FIRST_Y, 
+            width=constants.BUTTON_OPTION_WIDTH, 
+            height=constants.BUTTON_OPTION_HEIGHT,
+            title= current_event["option1_title"],
+            description= current_event["option1_description"],
+            icon_path= f"assets/img/{current_event["option1_type"]}.png"
             )
                  
-                self.button2 = Button_Options(
-                    x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
-                    y=constants.EVENT_OPTION_IMAGE_FIRST_Y + y_offset, 
-                    width=constants.BUTTON_OPTION_WIDTH, 
-                    height=constants.BUTTON_OPTION_HEIGHT,
-                    title= current_event["option2_title"],
-                    description= current_event["option2_description"],
-                    icon_path= f"assets/img/{current_event["option2_type"]}.png"
-                )
+        self.button2 = Button_Options(
+            x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
+            y=constants.EVENT_OPTION_IMAGE_FIRST_Y + y_offset, 
+            width=constants.BUTTON_OPTION_WIDTH, 
+            height=constants.BUTTON_OPTION_HEIGHT,
+            title= current_event["option2_title"],
+            description= current_event["option2_description"],
+            icon_path= f"assets/img/{current_event["option2_type"]}.png"
+            )
 
-        elif self.current_event["num_opciones"] == 3:
-                self.button1 = Button_Options(
-                    x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
-                    y=constants.EVENT_OPTION_IMAGE_FIRST_Y, 
-                    width=constants.BUTTON_OPTION_WIDTH, 
-                    height=constants.BUTTON_OPTION_HEIGHT,
-                    title= current_event["option1_title"],
-                    description= current_event["option1_description"],
-                    icon_path= f"assets/img/{current_event["option1_type"]}.png"
-                )
-                 
-                self.button2 = Button_Options(
-                    x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
-                    y=constants.EVENT_OPTION_IMAGE_FIRST_Y + y_offset, 
-                    width=constants.BUTTON_OPTION_WIDTH, 
-                    height=constants.BUTTON_OPTION_HEIGHT,
-                    title= current_event["option2_title"],
-                    description= current_event["option2_description"],
-                    icon_path= f"assets/img/{current_event["option2_type"]}.png"
-                )
-
-                self.button3 = Button_Options(
-                    x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
-                    y=constants.EVENT_OPTION_IMAGE_FIRST_Y + y_offset*2, 
-                    width=constants.BUTTON_OPTION_WIDTH, 
-                    height=constants.BUTTON_OPTION_HEIGHT,
-                    title= current_event["option2_title"],
-                    description= current_event["option2_description"],
-                    icon_path= f"assets/img/{current_event["option2_type"]}.png"
-                )
+        self.button3 = Button_Options(
+            x=constants.EVENT_OPTION_IMAGE_FIRST_X, 
+            y=constants.EVENT_OPTION_IMAGE_FIRST_Y + y_offset*2, 
+            width=constants.BUTTON_OPTION_WIDTH, 
+            height=constants.BUTTON_OPTION_HEIGHT,
+            title= current_event["option2_title"],
+            description= current_event["option2_description"],
+            icon_path= f"assets/img/{current_event["option2_type"]}.png"
+            )
 
 
     def draw(self, screen):
+        screen.blit(ui.img_bg_scaled,(0,0))
         image_path = self.current_event["image_path"]
         self.current_event_image = pygame.image.load(image_path).convert_alpha()
         self.current_event_image = pygame.transform.scale(self.current_event_image, (constants.EVENT_IMAGE_WIDTH, constants.EVENT_IMAGE_HEIGHT))
