@@ -16,8 +16,8 @@ class Game():
 
     def draw(self, screen):
        screen.fill(constants.COLOR_WHITE)
-       self.player.draw(screen)
        self.event.draw(screen)
+       self.player.draw(screen)
 
     def handle_events(self, event):
        self.event.handle_events(event)

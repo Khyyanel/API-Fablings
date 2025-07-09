@@ -41,6 +41,12 @@ try:
 except pygame.error as e:
     errors.img_error("assets/img/seleccion-personaje.png", e)
 
+#----------EVENTOS----------------------#
+try:
+    img_event_bg = pygame.image.load("assets/img/Fondo.png")
+    img_bg_scaled = pygame.transform.scale(img_event_bg, (constants.SCR_WIDTH, constants.SCR_HEIGHT))
+except pygame.error as e:
+    errors.img_error("assets/img/Fondo.png", e)
 
 
 
