@@ -33,7 +33,8 @@ class Character_Selection:
             height = constants.BUTTON_HEIGHT,
             text = "Tutorial",
             font = ui.font_button, 
-            color = constants.COLOR_WHITE
+            color = constants.COLOR_WHITE,
+            text_offset_x = 35
         )
 
         self.character_select_button = Button(
@@ -43,7 +44,8 @@ class Character_Selection:
             height = constants.BUTTON_HEIGHT,
             text = "Aceptar",
             font = ui.font_button, 
-            color = constants.COLOR_GRAY
+            color = constants.COLOR_GRAY,
+            text_offset_x = 35
         )
 
         self.character_back_button = Button(
@@ -54,7 +56,7 @@ class Character_Selection:
             text = "Regresar",
             font = ui.font_button, 
             color = constants.COLOR_BLUE, 
-            text_offset_x = 2
+            text_offset_x = 30
         )
 
 

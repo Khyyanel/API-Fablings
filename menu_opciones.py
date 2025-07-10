@@ -1,4 +1,4 @@
-import pygame, music, constants
+import pygame, music, constants, ui
 from button import Button
 
 class OptionsMenu:
@@ -6,8 +6,8 @@ class OptionsMenu:
         self.game_manager = game_manager
         self.volume = 0.5
         self.progress = 10 #simulacion de progreso
-        self.font = pygame.font.SysFont(None, 36)
-        self.back_button = Button(x = 50, y = 460, width = 150, height = 40, text = "Volver", font = self.font, color = constants.COLOR_WHITE, text_offset_x = 35)
+        self.font = ui.font_options #exporta la fuente desde el archivo ui
+        self.back_button = Button(x = 50, y = 460, width = 150, height = 50, text = "Volver", font = self.font, color = constants.COLOR_WHITE, text_offset_x = 25)
         
         
         pygame.mixer.init() #Inicializa el módulo mixer para la música
@@ -30,15 +30,20 @@ class OptionsMenu:
                 self.game_manager.set_game_state("MENU")
                 
     def draw(self, screen):
-        screen.fill((200, 200, 200))
-        font = pygame.font.SysFont(None, 36)
+        screen.blit(ui.img_options_scaled, (0,0)) #añade el fondo desde el archivo ui
+        font = ui.font_options #se declara la fuente
         
-        text_vol = font.render(f"Volumen:  {int(self.volume * 100)}%", True, (0, 0, 0))
+        text_vol = font.render(f"Volumen:  {int(self.volume * 100)}%", True, (255, 255, 255))
         screen.blit(text_vol, (100, 100))
         
-        screen.blit(font.render("+ / - para ajustar volumen", True, (0, 0, 0)), (100, 140))
-        text_credits = font.render (f"Créditos: Hecho por Uriel, Kiara, Hernán y Agostina", True, (0, 0, 0))
-        screen.blit(text_credits, (100, 280))
+        screen.blit(font.render("+ / - para ajustar volumen", True, (255, 255, 255)), (100, 140))
+        text_credits = "Creditos" #Hice los textos por separado asi quedaban uno abajo del otro
+        text_names = "Hecho por Uriel, Kiara, Hernán y Agostina"
+        text_credits_draw = font.render(text_credits, True, (255, 255, 255)) #Convierte al texto para poder mostrar en pantalla
+        text_names_draw = font.render(text_names, True, (255, 255, 255))
+        #text_credits = font.render(f"Créditos: Hecho por Uriel, Kiara, Hernán y Agostina", True, (255, 255, 255))
+        screen.blit(text_credits_draw, (385, 280)) #Los muestra en la pantalla y le da su ubicacion
+        screen.blit(text_names_draw, (125, 330))
         
         self.back_button.draw(screen)
         #pygame.draw.rect(screen, (100, 100, 100), self.back_button)

@@ -17,7 +17,7 @@ class Menu():
             text = "Jugar",
             font = ui.font_button, 
             color = constants.COLOR_WHITE, 
-            text_offset_x = 35
+            text_offset_x = 50
         )
 
         self.menu_opciones_button = Button (
@@ -28,7 +28,7 @@ class Menu():
             text = "Opciones",
             font = ui.font_button, 
             color = constants.COLOR_WHITE, 
-            text_offset_x = 5
+            text_offset_x = 22
         )
 
         self.exit_button = Button (
@@ -39,7 +39,7 @@ class Menu():
             text = "Salir",
             font = ui.font_button, 
             color = constants.COLOR_WHITE, 
-            text_offset_x = 40
+            text_offset_x = 55
         )
     
     def reset(self): #reiniciamos los valores
@@ -59,14 +59,14 @@ class Menu():
                 self._show_menu_options = True 
 
     def draw(self, screen): #Tenemos como parámetro la pantalla del juego, la mandamos a llamar 
-        screen.blit(ui.img_bg_scaled, (0,0)) #blit() sirve para dibujar. Aquí dibujamos el fondo a las medidas de la pantalla en la posición (x=0, y=0)
+        screen.blit(ui.img_initial_scaled, (0,0)) #blit() sirve para dibujar. Aquí dibujamos el fondo a las medidas de la pantalla en la posición (x=0, y=0)
 
         self.start_button.draw(screen)
         self.menu_opciones_button.draw(screen)
         self.exit_button.draw(screen)
 
         #mostramos el título 
-        screen.blit(ui.title_menu, (constants.TITLE_MENU_X, constants.TITLE_MENU_Y))
+        #screen.blit(ui.title_menu, (constants.TITLE_MENU_X, constants.TITLE_MENU_Y))
 
     #Funciones GET
     #Sirven para adquirir los valores internos de la clase
