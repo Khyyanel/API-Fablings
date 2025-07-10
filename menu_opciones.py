@@ -41,13 +41,11 @@ class OptionsMenu:
         text_names = "Hecho por Uriel, Kiara, Hernán y Agostina"
         text_credits_draw = font.render(text_credits, True, (255, 255, 255)) #Convierte al texto para poder mostrar en pantalla
         text_names_draw = font.render(text_names, True, (255, 255, 255))
-        #text_credits = font.render(f"Créditos: Hecho por Uriel, Kiara, Hernán y Agostina", True, (255, 255, 255))
+        
         screen.blit(text_credits_draw, (385, 280)) #Los muestra en la pantalla y le da su ubicacion
         screen.blit(text_names_draw, (125, 330))
         
         self.back_button.draw(screen)
-        #pygame.draw.rect(screen, (100, 100, 100), self.back_button)
-        #screen.blit(font.render("Volver", True, (255, 255, 255)), (self.back_button.x + 20, self.back_button.y + 5))
         
 class TutorialScreen:
     def __init__(self, game_manager):

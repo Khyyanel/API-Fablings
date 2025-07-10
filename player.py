@@ -104,7 +104,7 @@ class Player():
                     #shape = self.image.get_rect(center=(self.x, self.y)) 
 
             except pygame.error as e:
-                errors.img_error()
+                errors.img_error(image_to_load, e)
       
 
     def draw(self, screen: pygame.Surface):
@@ -150,8 +150,7 @@ class Player():
                 x = constants.TEXT_STADISTICS_X + x_offset*2
             elif name == "conocimiento":
                 x = constants.TEXT_STADISTICS_X + x_offset*3
-                
-                
+                    
             screen.blit(text_stadistics, (x, constants.TEXT_STADISTICS_Y)) #Dibujamos el número
 
     def get_current_stadistic(self,stadistic):

@@ -12,7 +12,7 @@ la lógica principal, la puntuación, los recursos, etc., y solo tiene sentido q
 fuente de verdad para toda esa información.
 """
 
-import pygame, constants, music
+import pygame, constants
 from main_menu import Menu
 from character_selection import Character_Selection
 from game import Game
@@ -40,11 +40,12 @@ class GameManager():
 
             self.main_menu = Menu(self) #se crea una instancia llamada main_menu de la Clase Menu
             self.character_selection = Character_Selection(self) 
+            self.options_menu = OptionsMenu(self)
             self.game_logic = Game()
 
             self.game_state = "MENU" #Para manejar el estado actual del juego
             
-            self.options_menu = OptionsMenu(self)
+           
 
     
     #Función para establecer el estado del juego, le mandamos el parámetro del estado en el que debe estar
@@ -100,7 +101,6 @@ class GameManager():
             self.running = False
             
         elif self.game_state == "OPTIONS_MENU":
-            
             pass
 
 
@@ -117,9 +117,6 @@ class GameManager():
             
         elif self.game_state == "OPTIONS_MENU":
             self.options_menu.draw(self.screen)
-
-            
-            pass
             
         pygame.display.flip() #Le muestra al usuario las imagenes que cargamos
 

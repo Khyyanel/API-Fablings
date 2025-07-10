@@ -22,7 +22,7 @@ class Game():
     def handle_events(self, event):
        self.event.handle_events(event)
 
-    def compare_stadistic_event_and_player(self): #PENDIENTE
+    def compare_stadistic_event_and_player(self): #PARA EL FUTURO
         stadistic_event = self.event.get_current_stadistic()
         stadistic_player = self.player.get_current_stadistic(stadistic_event)
 
